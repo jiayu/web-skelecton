@@ -4,13 +4,6 @@
 	<groupId>me.jamc</groupId>
 	<artifactId>skeleton</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-			<version>1.4.1.RELEASE</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -20,4 +13,18 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>1.4.1.RELEASE</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>1.4.1.RELEASE</version>
+		</dependency>
+	</dependencies>
 </project>
