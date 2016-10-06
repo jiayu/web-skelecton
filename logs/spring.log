@@ -1,0 +1,25 @@
+2016-10-06 13:26:48.202  INFO 15748 --- [restartedMain] me.jamc.skeleton.Application             : Starting Application on Jamcs-MBP.local with PID 15748 (/Users/Jamc/workspace/web-skeleton/target/classes started by Jamc in /Users/Jamc/workspace/web-skeleton)
+2016-10-06 13:26:48.202  INFO 15748 --- [restartedMain] me.jamc.skeleton.Application             : No active profile set, falling back to default profiles: default
+2016-10-06 13:26:48.205  INFO 15748 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@57527b61: startup date [Thu Oct 06 13:26:48 CST 2016]; root of context hierarchy
+2016-10-06 13:26:48.440  INFO 15748 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2016-10-06 13:26:48.440  INFO 15748 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-10-06 13:26:48.441  INFO 15748 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.5
+2016-10-06 13:26:48.444  INFO 15748 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-10-06 13:26:48.445  INFO 15748 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 241 ms
+2016-10-06 13:26:48.469  INFO 15748 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2016-10-06 13:26:48.470  INFO 15748 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-10-06 13:26:48.470  INFO 15748 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-10-06 13:26:48.471  INFO 15748 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-10-06 13:26:48.471  INFO 15748 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2016-10-06 13:26:48.519  INFO 15748 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@57527b61: startup date [Thu Oct 06 13:26:48 CST 2016]; root of context hierarchy
+2016-10-06 13:26:48.524  INFO 15748 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/]}" onto java.lang.String me.jamc.skeleton.Application.home()
+2016-10-06 13:26:48.524  INFO 15748 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/database]}" onto java.lang.String me.jamc.skeleton.Application.database()
+2016-10-06 13:26:48.525  INFO 15748 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-10-06 13:26:48.525  INFO 15748 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-10-06 13:26:48.529  INFO 15748 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-10-06 13:26:48.529  INFO 15748 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-10-06 13:26:48.537  INFO 15748 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-10-06 13:26:48.554  INFO 15748 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2016-10-06 13:26:48.591  INFO 15748 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2016-10-06 13:26:48.597  INFO 15748 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2016-10-06 13:26:48.598  INFO 15748 --- [restartedMain] me.jamc.skeleton.Application             : Started Application in 0.422 seconds (JVM running for 18.368)
