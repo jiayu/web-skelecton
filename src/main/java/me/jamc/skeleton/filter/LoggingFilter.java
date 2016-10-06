@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter
+@WebFilter(urlPatterns = "/user/*")
 public class LoggingFilter implements Filter {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingFilter.class);
@@ -27,7 +27,7 @@ public class LoggingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        //Logging request info here
+        // Logging request info here
         LOG.info("address is {} and remote is {}", request.getLocalAddr(), request.getRemoteHost());
         chain.doFilter(request, response);
     }
