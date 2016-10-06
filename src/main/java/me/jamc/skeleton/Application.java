@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.jamc.skeleton.configs.DatabaseConfig;
+import me.jamc.skeleton.config.DatabaseConfig;
 
 @RestController
 @SpringBootApplication

@@ -1,4 +1,4 @@
-package me.jamc.skeleton.configs;
+package me.jamc.skeleton.config;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.context.properties.ConfigurationProperties;
