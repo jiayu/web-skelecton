@@ -9,14 +9,20 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 @WebFilter(urlPatterns = "/user/*")
-public class LoggingFilter implements Filter {
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class TrackingFilter implements Filter {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LoggingFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TrackingFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -28,7 +34,8 @@ public class LoggingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         // Logging request info here
-        LOG.info("address is {} and remote is {}", request.getLocalAddr(), request.getRemoteHost());
+        HttpServletRequest r = (HttpServletRequest)request;
+        LOG.info("calling url {} from ip {}", r.getRequestURI(), r.getRemoteAddr());
         chain.doFilter(request, response);
     }
 
