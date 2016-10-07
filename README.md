@@ -8,8 +8,7 @@ A skeleton project for web serivce based on [Spring Boot](https://github.com/spr
 * Restful API
 * URL based actions
 * Integration with database migration tool
-* Database ORM ready
-* Automate building with Docker
+* JPA ready
 * Monitoring features
 
 
