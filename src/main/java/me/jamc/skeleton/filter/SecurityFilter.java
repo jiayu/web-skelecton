@@ -21,9 +21,7 @@ import org.springframework.stereotype.Component;
 
 import me.jamc.skeleton.security.Authenticator;
 
-@WebFilter
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE + 1)
+@WebFilter(urlPatterns = "/api/user/*")
 public class SecurityFilter implements Filter {
     
     private static final Logger LOG = LoggerFactory.getLogger(SecurityFilter.class);

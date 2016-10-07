@@ -17,9 +17,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@WebFilter(urlPatterns = "/user/*")
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@WebFilter(urlPatterns = "/api/user/*")
 public class TrackingFilter implements Filter {
 
     private static final Logger LOG = LoggerFactory.getLogger(TrackingFilter.class);
