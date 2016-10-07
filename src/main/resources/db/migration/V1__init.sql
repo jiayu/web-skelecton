@@ -1,7 +1,8 @@
 create table user (
-	id bigint not null,
+	id int not null auto_increment,
 	first_name varchar(255) not null,
-	last_name varchar(255) not null
+	last_name varchar(255) not null,
+	primary key (id)
 );
 
-insert into user (id, first_name, last_name) values (1, 'Dave', 'Syer');
+insert into user (first_name, last_name) values ('Dave', 'Syer');
