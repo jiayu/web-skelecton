@@ -19,7 +19,7 @@ public class UserController {
     private static Map<Integer, User> userDB = new HashMap<Integer, User>();
     private final AtomicInteger counter = new AtomicInteger();
 
-    @RequestMapping(value = "/user/{firstName}/{lastName}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/user/{firstName}/{lastName}", method = RequestMethod.PUT)
     public boolean addUser(@PathVariable String firstName, @PathVariable String lastName) {
         User u = new User();
         u.setFirstName(firstName);
@@ -29,7 +29,7 @@ public class UserController {
         return true;
     }
 
-    @RequestMapping(value = "/user/{id}/{firstName}/{lastName}", method=RequestMethod.POST) 
+    @RequestMapping(value = "/api/user/{id}/{firstName}/{lastName}", method=RequestMethod.POST) 
     public boolean updateUser(@PathVariable int id, @PathVariable String firstName,
             @PathVariable String lastName) {
         if (userDB.containsKey(id)) {
@@ -41,13 +41,13 @@ public class UserController {
         return false;
     }
 
-    @RequestMapping(value= "/user/{id}", method=RequestMethod.GET)
+    @RequestMapping(value= "/api/user/{id}", method=RequestMethod.GET)
     public User getUser(@PathVariable int id) {
         User u = userDB.get(id);
         return u;
     }
 
-    @RequestMapping(value = "/user/{id}", method=RequestMethod.DELETE)
+    @RequestMapping(value = "/api/user/{id}", method=RequestMethod.DELETE)
     public boolean deleteUser(@PathVariable int id) {
         if (userDB.containsKey(id)) {
             userDB.remove(id);
@@ -56,7 +56,7 @@ public class UserController {
         return false;
     }
 
-    @RequestMapping(value = "/user/all", method=RequestMethod.GET)
+    @RequestMapping(value = "/api/user/all", method=RequestMethod.GET)
     public List<User> getUsers() {
         List<User> list = new LinkedList<User>();
         userDB.keySet().forEach( k -> {list.add(userDB.get(k));});
