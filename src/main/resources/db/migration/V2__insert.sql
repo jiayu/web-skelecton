@@ -1,1 +1,0 @@
-insert into user (first_name, last_name) values ('Jeff', 'Dean');
