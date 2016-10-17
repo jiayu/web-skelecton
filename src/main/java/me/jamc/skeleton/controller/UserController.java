@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @RequestMapping(value = "/{firstName}/{lastName}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{firstName}/{lastName}", method = RequestMethod.POST)
     @ApiOperation(value = "Add a new user", 
         notes = "use for adding a new user, firstname and lastname could not be empty")
     public boolean addUser(@PathVariable String firstName, @PathVariable String lastName) {
@@ -30,8 +30,8 @@ public class UserController {
         return service.addUser(firstName, lastName);
     }
 
-    @RequestMapping(value = "/{id}/{firstName}/{lastName}", method=RequestMethod.POST)
-    @ApiOperation(value = "update an existing user", notes = "use to udpate an existing user")
+    @RequestMapping(value = "/{id}/{firstName}/{lastName}", method=RequestMethod.PUT)
+    @ApiOperation(value = "update an existing user", notes = "use to update an existing user")
     public boolean updateUser(@PathVariable int id, @PathVariable String firstName,
             @PathVariable String lastName) {
         if(StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)) {
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/all", method=RequestMethod.GET)
-    @ApiOperation(value = "get back all the exisiting users")
+    @ApiOperation(value = "get back all the existing users")
     public List<User> getUsers() {
 
         return service.getAllUsers();

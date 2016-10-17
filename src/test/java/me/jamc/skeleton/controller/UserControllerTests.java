@@ -32,7 +32,7 @@ public class UserControllerTests {
         headers.set("Authorization", "authed");
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<Boolean> resp = client
-                .exchange("/api/user/Michael/Jordan", HttpMethod.PUT, entity, Boolean.class);
+                .exchange("/api/user/Michael/Jordan", HttpMethod.POST, entity, Boolean.class);
         assertThat(resp.getBody()).isTrue();
         User u = repo.findOne(1);
         assertThat(u.getFirstName()).isEqualTo("Michael");
