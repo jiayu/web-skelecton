@@ -30,6 +30,7 @@ public class ValidationInterceptor extends HandlerInterceptorAdapter {
         String method = request.getMethod();
         String uri = request.getRequestURI();
         String params = request.getQueryString();
+        //TODO this is not a way we should getting a secretkey, need to refine this part
         String secretKey = request.getHeader("accessKey");
         String signature = request.getHeader("signature");
         long timestamp = Long.parseLong(request.getHeader("timestamp"));
