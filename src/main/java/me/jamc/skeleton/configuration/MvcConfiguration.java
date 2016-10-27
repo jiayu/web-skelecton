@@ -22,7 +22,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(validInt).addPathPatterns("/api/**"); //Step 1, to check if the request is valid
+        registry.addInterceptor(validInt).addPathPatterns("/api/**"); //Step 1, to check if the request is valid
         registry.addInterceptor(execInt).addPathPatterns("/api/**"); //Step 2, to track the performance
     }
 }

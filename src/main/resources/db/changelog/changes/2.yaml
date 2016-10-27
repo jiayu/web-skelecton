@@ -8,7 +8,7 @@ databaseChangeLog:
         columns:
         - column:
             name: ID
-            type: int
+            type: bigint
             autoIncrement: true
             constraints: { primaryKey: true, nullable: false }
         - column:
@@ -24,6 +24,38 @@ databaseChangeLog:
             type: int
             constraints: { nullable: false }
         - column:
-            name: INSERT_TIME
+            name: UPDATE_TIME
+            type: datetime
+            constraints: { nullable: false }
+- changeSet:
+    id: 3
+    author: Jiayu
+    changes:
+    - createTable:
+        tableName: TRACKER_UNHANDLED_EXCEPTION
+        columns:
+        - column:
+            name: ID
+            type: bigint
+            autoIncrement: true
+            constraints: { primaryKey: true, nullable: false }
+        - column:
+            name: EXCEPTION_NAME
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: EXCEPTION_MESSAGE
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: URI
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: METHOD
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: UPDATE_TIME
             type: datetime
             constraints: { nullable: false }

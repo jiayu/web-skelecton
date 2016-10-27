@@ -51,7 +51,7 @@ public class ExecutionInterceptor extends HandlerInterceptorAdapter {
                 url, uri, method, params, duration);
         RequestTime rt = new RequestTime();
         rt.setExecutionTime((int)duration);
-        rt.setInsertTime(new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
+        rt.setUpdateTime(new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
         rt.setUri(uri);
         rt.setMethod(method);
         helper.requestTime().save(rt);

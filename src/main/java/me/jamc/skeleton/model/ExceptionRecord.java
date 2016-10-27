@@ -11,22 +11,25 @@ import javax.persistence.Table;
  * Created by Jamc on 10/27/16.
  */
 @Entity
-@Table(name = "TRACKER_REQUEST_TIME")
-public class RequestTime {
+@Table(name = "TRACKER_UNHANDLED_EXCEPTION")
+public class ExceptionRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private long id;
 
+    @Column(name = "EXCEPTION_NAME")
+    private String exceptionName;
+
+    @Column(name = "EXCEPTION_MESSAGE")
+    private String exceptionMessage;
+
     @Column(name = "URI")
     private String uri;
 
     @Column(name = "METHOD")
     private String method;
-
-    @Column(name = "EXECUTION_TIME")
-    private int executionTime;
 
     @Column(name = "UPDATE_TIME")
     private String updateTime;
@@ -39,6 +42,22 @@ public class RequestTime {
         this.id = id;
     }
 
+    public String getExceptionName() {
+        return exceptionName;
+    }
+
+    public void setExceptionName(String exceptionName) {
+        this.exceptionName = exceptionName;
+    }
+
+    public String getExceptionMessage() {
+        return exceptionMessage;
+    }
+
+    public void setExceptionMessage(String exceptionMessage) {
+        this.exceptionMessage = exceptionMessage;
+    }
+
     public String getUri() {
         return uri;
     }
@@ -47,12 +66,12 @@ public class RequestTime {
         this.uri = uri;
     }
 
-    public int getExecutionTime() {
-        return executionTime;
+    public String getMethod() {
+        return method;
     }
 
-    public void setExecutionTime(int executionTime) {
-        this.executionTime = executionTime;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public String getUpdateTime() {
@@ -61,13 +80,5 @@ public class RequestTime {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
     }
 }

@@ -1,5 +1,6 @@
 package me.jamc.skeleton.handler;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import me.jamc.skeleton.dao.DaoHelper;
 import me.jamc.skeleton.exception.ValidationException;
+import me.jamc.skeleton.model.ExceptionRecord;
 import me.jamc.skeleton.security.Authorization;
 
 /**
@@ -27,9 +30,24 @@ public class GlobalExceptionHandler {
     @Autowired
     private Authorization sign;
 
+    @Autowired
+    private DaoHelper helper;
+
     @ExceptionHandler(Exception.class)
-    public void defaultHandler(HttpServletRequest req, Exception e) throws Exception {
+    public void defaultHandler(HttpServletRequest request, Exception e) throws Exception {
         LOG.error("Error {}!!", e.getMessage());
+
+        String method = request.getMethod();
+        String uri = request.getRequestURI();
+        String params = request.getQueryString();
+        ExceptionRecord r = new ExceptionRecord();
+        r.setMethod(method);
+        r.setUri(uri);
+        r.setUpdateTime(new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
+        r.setExceptionMessage(e.getMessage());
+        r.setExceptionName(e.getClass().getName());
+        helper.exceptionRecord().save(r);
+
         throw e;
     }
 

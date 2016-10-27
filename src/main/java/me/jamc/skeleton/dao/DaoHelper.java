@@ -15,6 +15,9 @@ public class DaoHelper {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ExceptionRecordRepository exceptionRecordRepository;
+
     public RequestTimeRepository requestTime() {
         return requestTimeRepository;
     }
@@ -22,4 +25,6 @@ public class DaoHelper {
     public UserRepository user() {
         return userRepository;
     }
+
+    public ExceptionRecordRepository exceptionRecord() { return exceptionRecordRepository; }
 }
