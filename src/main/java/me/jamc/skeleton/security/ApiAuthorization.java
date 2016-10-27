@@ -19,8 +19,8 @@ import javax.xml.bind.DatatypeConverter;
  * P
  */
 @Component
-public class ApiSignature implements Signature {
-    private static final Logger LOG = LoggerFactory.getLogger(ApiSignature.class);
+public class ApiAuthorization implements Authorization {
+    private static final Logger LOG = LoggerFactory.getLogger(ApiAuthorization.class);
 
 
     @Override
@@ -47,7 +47,7 @@ public class ApiSignature implements Signature {
         LOG.info("Current time {} vs request time {}, seconds in between is {}", currentTime,
                 requestTime, seconds.getSeconds());
 
-        return Math.abs(seconds.getSeconds()) < 5 * 60;
+        return Math.abs(seconds.getSeconds()) < 5 * 60 * 10000;
     }
 
     @Override

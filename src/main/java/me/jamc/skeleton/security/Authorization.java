@@ -1,6 +1,6 @@
 package me.jamc.skeleton.security;
 
-public interface Signature {
+public interface Authorization {
 
     public boolean verify(String uri, String method, String params, long timestamp, String secretKey,
                           String signature);

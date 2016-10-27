@@ -17,19 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 public class ExecutionInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExecutionInterceptor.class);
+    private static final String START_TIME = "startTime";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOG.info("received a request to {}", request.getRequestURI());
-        request.setAttribute("startTime", System.currentTimeMillis());
+        request.setAttribute(START_TIME, System.currentTimeMillis());
         return super.preHandle(request, response, handler);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        long startTime = Long.parseLong(request.getAttribute("startTime").toString());
         long endTime = System.currentTimeMillis();
+        //Make duration to -1 if for some reason there is no start time in request attribute
+        Object strStartTime = request.getAttribute(START_TIME);
+        long startTime =
+                strStartTime == null ?  endTime + 1 : Long.parseLong(strStartTime.toString());
 
         String method = request.getMethod();
         String uri = request.getRequestURI();
@@ -37,5 +41,6 @@ public class ExecutionInterceptor extends HandlerInterceptorAdapter {
         String params = request.getQueryString();
         LOG.info("Request info: url {}, uri {}, method {}, params {}, time spent {}ms",
                 url, uri, method, params, endTime - startTime);
+
     }
 }

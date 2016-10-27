@@ -9,7 +9,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import me.jamc.skeleton.security.Signature;
+import me.jamc.skeleton.exception.ValidationException;
+import me.jamc.skeleton.security.Authorization;
 
 /**
  * Created by Jamc on 10/26/16.
@@ -20,7 +21,7 @@ public class ValidationInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(ValidationInterceptor.class);
 
     @Autowired
-    private Signature sign;
+    private Authorization sign;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -32,6 +33,10 @@ public class ValidationInterceptor extends HandlerInterceptorAdapter {
         String secretKey = request.getHeader("accessKey");
         String signature = request.getHeader("signature");
         long timestamp = Long.parseLong(request.getHeader("timestamp"));
-        return sign.verify(uri, method, params, timestamp, secretKey, signature);
+        if (sign.verify(uri, method, params, timestamp, secretKey, signature)) {
+            return true;
+        } else {
+            throw new ValidationException("Failed on signature validation");
+        }
     }
 }
