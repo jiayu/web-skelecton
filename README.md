@@ -34,8 +34,8 @@ in every logical endpoint.
 
 Interceptor in Spring in a savior. Thanks to AOP, interceptor performs its logic
 before and after each http request without touching any of the code in controller classes.
-Take a look at [ValidationInterceptor](src/main/java/me/jamc/skeleton/Interceptor/ValidationInterceptor.java)
-and [ExecutionInterceptor](src/main/java/me/jamc/skeleton/Interceptor/ExecutionInterceptor.java) and
+Take a look at [ValidationInterceptor](src/main/java/me/jamc/skeleton/interceptor/ValidationInterceptor.java)
+and [ExecutionInterceptor](src/main/java/me/jamc/skeleton/interceptor/ExecutionInterceptor.java) and
 feel how they work.You can also add your customized interceptor and register it in MvcConfiguration class.
 
 ## Database migration tool
