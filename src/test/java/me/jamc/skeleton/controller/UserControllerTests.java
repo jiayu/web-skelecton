@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import me.jamc.skeleton.model.User;
-import me.jamc.skeleton.repository.UserRepository;
+import me.jamc.skeleton.dao.UserRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)

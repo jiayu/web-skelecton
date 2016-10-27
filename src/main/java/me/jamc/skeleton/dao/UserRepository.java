@@ -1,4 +1,4 @@
-package me.jamc.skeleton.repository;
+package me.jamc.skeleton.dao;
 
 import org.springframework.data.repository.CrudRepository;
 

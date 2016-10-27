@@ -1,0 +1,29 @@
+databaseChangeLog:
+- changeSet:
+    id: 2
+    author: Jiayu
+    changes:
+    - createTable:
+        tableName: TRACKER_REQUEST_TIME
+        columns:
+        - column:
+            name: ID
+            type: int
+            autoIncrement: true
+            constraints: { primaryKey: true, nullable: false }
+        - column:
+            name: URI
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: METHOD
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: EXECUTION_TIME
+            type: int
+            constraints: { nullable: false }
+        - column:
+            name: INSERT_TIME
+            type: datetime
+            constraints: { nullable: false }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import me.jamc.skeleton.model.User;
-import me.jamc.skeleton.repository.UserRepository;
+import me.jamc.skeleton.dao.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
