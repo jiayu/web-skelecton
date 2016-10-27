@@ -34,8 +34,9 @@ in every logical endpoint.
 
 Interceptor in Spring in a savior. Thanks to AOP, interceptor performs its logic
 before and after each http request without touching any of the code in controller classes.
-Take a look at ValidationInterceptor and ExecutionInterceptor and feel how they work.
-You can also add your customized interceptor and register it in MvcConfiguration class.
+Take a look at [ValidationInterceptor](src/main/java/me/jamc/skeleton/Interceptor/ValidationInterceptor.java)
+and [ExecutionInterceptor](src/main/java/me/jamc/skeleton/Interceptor/ExecutionInterceptor.java) and
+feel how they work.You can also add your customized interceptor and register it in MvcConfiguration class.
 
 ## Database migration tool
 A good practise of managing database schema is to manage it in your code. This help in
@@ -43,9 +44,9 @@ several ways including:
 * deployment to different environments
 * writing integration tests
 
-Spring Boot supports liquidbase and flyway by default. The reason I choose liquidbase is
-because the flexibility of managing database schema. I use YAML for schema file as it is
-database agnostic, allowing me the use the same schema file in production and
+Spring Boot supports [Liquidbase](http://www.liquibase.org/) and [Flyway](https://flywaydb.org/) by default.
+The reason I choose liquidbase is because the flexibility of managing database schema. I use [YAML](http://yaml.org/)
+for schema file as it is database agnostic, allowing me the use the same schema file in production and
 integration test. Even better, if for same reasons, I want to switch MySQL to ProgresSQL
 or vice versa, I don't need to update any of these schema files.
 
@@ -56,7 +57,7 @@ Just a easy way to handle database operation. Pretty common requirements in web 
 Exception handling is another common requirement in not just web server but all kinds of
 applications. Spring Boot(MVC) takes care of most of the heavy lifting already. Meaning that,
 it deals with most of the exception it generally you can meet with its framework. But I want to
-add some specific to my application, eg: validation exception. I added a GlobalExceptionHandler.
+add some specific to my application, eg: validation exception. I added a [GlobalExceptionHandler](src/main/java/me/jamc/skeleton/handler/GlobalExceptionHandler.java).
 It saves those exceptions that I didn't think of which I can later revisit.
 Furthermore, it catches validation exception and returns a proper http status code in response.
 
