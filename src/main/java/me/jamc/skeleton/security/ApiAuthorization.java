@@ -3,9 +3,11 @@ package me.jamc.skeleton.security;
 import org.assertj.core.util.Preconditions;
 import org.assertj.core.util.Strings;
 import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -22,6 +24,8 @@ import javax.xml.bind.DatatypeConverter;
 public class ApiAuthorization implements Authorization {
     private static final Logger LOG = LoggerFactory.getLogger(ApiAuthorization.class);
 
+    @Value("${app.skeleton.validation.timeAllow}")
+    private int timeAllow;
 
     @Override
     public boolean verify(String uri, String method, String params, long timestamp, String secretKey,
@@ -42,12 +46,11 @@ public class ApiAuthorization implements Authorization {
         DateTime currentTime = new DateTime();
         DateTime requestTime = new DateTime(timestamp);
 
-        Seconds seconds = Seconds.secondsBetween(requestTime, currentTime);
+        Minutes minutes = Minutes.minutesBetween(requestTime, currentTime);
 
-        LOG.info("Current time {} vs request time {}, seconds in between is {}", currentTime,
-                requestTime, seconds.getSeconds());
-
-        return Math.abs(seconds.getSeconds()) < 5 * 60;
+        LOG.info("Current time {} vs request time {}, seconds in between is {} mins", currentTime,
+                requestTime, minutes.getMinutes());
+        return Math.abs(minutes.getMinutes()) < timeAllow;
     }
 
     @Override

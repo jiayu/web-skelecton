@@ -28,10 +28,11 @@ public class ExecutionInterceptor extends HandlerInterceptorAdapter {
     private DaoHelper helper;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         LOG.info("received a request to {}", request.getRequestURI());
         request.setAttribute(START_TIME, System.currentTimeMillis());
-        return super.preHandle(request, response, handler);
+        return true;
     }
 
     @Override
