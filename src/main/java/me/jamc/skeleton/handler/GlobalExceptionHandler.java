@@ -34,12 +34,11 @@ public class GlobalExceptionHandler {
     private DaoHelper helper;
 
     @ExceptionHandler(Exception.class)
-    public void defaultHandler(HttpServletRequest request, Exception e) throws Exception {
+    public void defaultExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
         LOG.error("Error {}!!", e.getMessage());
 
         String method = request.getMethod();
         String uri = request.getRequestURI();
-        String params = request.getQueryString();
         ExceptionRecord r = new ExceptionRecord();
         r.setMethod(method);
         r.setUri(uri);
@@ -52,8 +51,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ModelAndView validationErrorHandler(HttpServletRequest request, HttpServletResponse response,
-                                       ValidationException ex) throws IOException {
+    public void validationExceptionHandler(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         String method = request.getMethod();
         String uri = request.getRequestURI();
         String params = request.getQueryString();
@@ -64,6 +63,5 @@ public class GlobalExceptionHandler {
                 signature, sign.sign(uri,method, params, secretKey, timestamp));
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-        return new ModelAndView();
     }
 }

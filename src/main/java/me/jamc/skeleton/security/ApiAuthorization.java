@@ -47,7 +47,7 @@ public class ApiAuthorization implements Authorization {
         LOG.info("Current time {} vs request time {}, seconds in between is {}", currentTime,
                 requestTime, seconds.getSeconds());
 
-        return Math.abs(seconds.getSeconds()) < 5 * 60 * 10000;
+        return Math.abs(seconds.getSeconds()) < 5 * 60;
     }
 
     @Override
