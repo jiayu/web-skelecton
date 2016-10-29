@@ -14,7 +14,7 @@ import me.jamc.skeleton.model.User;
 import me.jamc.skeleton.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/ws/user")
 public class UserController {
 
     @Autowired

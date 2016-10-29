@@ -18,6 +18,8 @@ spring:
 
 logging:
   path: logs/
+  level:
+      org.springframework.security: DEBUG
 
 server:
   port: 8080

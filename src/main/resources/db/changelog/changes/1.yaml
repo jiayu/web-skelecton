@@ -19,3 +19,11 @@ databaseChangeLog:
             name: LAST_NAME
             type: varchar(255)
             constraints: { nullable: false }
+        - column:
+            name: PASSWORD
+            type: varchar(255)
+            constraints: { nullable: false }
+        - column:
+            name: USER_NAME
+            type: varchar(255)
+            constraints: { nullable: false }
