@@ -1,5 +1,7 @@
 package me.jamc.skeleton.oauth;
 
+import com.google.common.base.Preconditions;
+
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.extractors.OAuth2AccessTokenExtractor;
@@ -9,6 +11,7 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
 import org.assertj.core.util.Strings;
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.Random;
 
@@ -16,17 +19,19 @@ import java.util.Random;
 /**
  * Created by Jamc on 10/29/16.
  */
-public class OAuthCommonApi extends DefaultApi20 {
+public class OAuthCommonApi extends DefaultApi20 implements InitializingBean{
 
     public static final String OAUTH_GITHUB = "github";
 
     private String clientId;
     private String clientSecret;
-    private String accessTokenPoint;
+    private String accessTokenEndpoint;
+    private String refreshTokenEndpoint;
     private String authorizationBaseUrl;
     private String callBackUrl;
     private String scope;
     private Boolean state;
+    private String verb;
 
     private OAuth20Service service;
     private String platform;
@@ -39,8 +44,16 @@ public class OAuthCommonApi extends DefaultApi20 {
         return platform;
     }
 
+    public void setVerb(String verb) {
+        this.verb = verb.toUpperCase();
+    }
+
     public void setScope(String scope) {
         this.scope = scope;
+    }
+
+    public void setRefreshTokenEndpoint(String refreshTokenEndpoint) {
+        this.refreshTokenEndpoint = refreshTokenEndpoint;
     }
 
     public void setState(Boolean state) {
@@ -55,8 +68,8 @@ public class OAuthCommonApi extends DefaultApi20 {
         this.clientSecret = clientSecret;
     }
 
-    public void setAccessTokenPoint(String accessTokenPoint) {
-        this.accessTokenPoint = accessTokenPoint;
+    public void setAccessTokenEndpoint(String accessTokenEndpoint) {
+        this.accessTokenEndpoint = accessTokenEndpoint;
     }
 
     public void setAuthorizationBaseUrl(String authorizationBaseUrl) {
@@ -73,12 +86,17 @@ public class OAuthCommonApi extends DefaultApi20 {
 
     @Override
     public Verb getAccessTokenVerb() {
-        return Verb.POST;
+        return Verb.valueOf(verb);
+    }
+
+    @Override
+    public String getRefreshTokenEndpoint() {
+        return refreshTokenEndpoint;
     }
 
     @Override
     public String getAccessTokenEndpoint() {
-        return accessTokenPoint;
+        return accessTokenEndpoint;
     }
 
     @Override
@@ -109,5 +127,25 @@ public class OAuthCommonApi extends DefaultApi20 {
             service = sb.build(this);
         }
         return service;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Preconditions.checkNotNull(clientId, errorMsg("clientId"));
+        Preconditions.checkNotNull(clientSecret, errorMsg("clientSecret"));
+        Preconditions.checkNotNull(accessTokenEndpoint, errorMsg("accessTokenEndpoint"));
+        Preconditions.checkNotNull(authorizationBaseUrl, errorMsg("authorizationBaseUrl"));
+        Preconditions.checkNotNull(callBackUrl, errorMsg("callBackUrl"));
+        Preconditions.checkNotNull(verb, errorMsg("verb"));
+        Preconditions.checkState(Verb.valueOf(verb) instanceof Verb);
+
+        if (Strings.isNullOrEmpty(refreshTokenEndpoint)) {
+            refreshTokenEndpoint = accessTokenEndpoint;
+        }
+    }
+
+    private String errorMsg(String field) {
+        return String.format("property %s for %s is required for setting up OAuth profile",
+                field, platform);
     }
 }
