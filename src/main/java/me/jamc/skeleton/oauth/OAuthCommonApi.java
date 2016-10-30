@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  * Created by Jamc on 10/29/16.
  */
-public class OAuthCommonApi extends DefaultApi20 implements InitializingBean{
+public class OAuthCommonApi extends DefaultApi20 {
 
     public static final String OAUTH_GITHUB = "github";
 
@@ -129,7 +129,6 @@ public class OAuthCommonApi extends DefaultApi20 implements InitializingBean{
         return service;
     }
 
-    @Override
     public void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(clientId, errorMsg("clientId"));
         Preconditions.checkNotNull(clientSecret, errorMsg("clientSecret"));

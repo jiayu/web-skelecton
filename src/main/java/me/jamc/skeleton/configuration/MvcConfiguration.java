@@ -35,7 +35,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         registry.addInterceptor(execInt).addPathPatterns("/ws/**"); //Step 2, to track the performance
     }
 
-    @Bean
+    @Bean(initMethod = "afterPropertiesSet")
     @ConfigurationProperties(prefix = "app.auth.github")
     public OAuthCommonApi OAuthApi() {
         return new OAuthCommonApi(OAuthCommonApi.OAUTH_GITHUB);
