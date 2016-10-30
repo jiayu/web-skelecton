@@ -36,3 +36,5 @@ app:
       accessTokenPoint: https://github.com/login/oauth/access_token
       authorizationBaseUrl: https://github.com/login/oauth/authorize
       callBackUrl: http://localhost:8080/auth/github
+      scope: user
+      state: true

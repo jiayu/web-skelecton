@@ -8,6 +8,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
+import org.assertj.core.util.Strings;
+
+import java.util.Random;
+
 
 /**
  * Created by Jamc on 10/29/16.
@@ -21,6 +25,8 @@ public class OAuthCommonApi extends DefaultApi20 {
     private String accessTokenPoint;
     private String authorizationBaseUrl;
     private String callBackUrl;
+    private String scope;
+    private Boolean state;
 
     private OAuth20Service service;
     private String platform;
@@ -31,6 +37,14 @@ public class OAuthCommonApi extends DefaultApi20 {
 
     public String getPlatform() {
         return platform;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public void setClientId(String clientId) {
@@ -79,11 +93,20 @@ public class OAuthCommonApi extends DefaultApi20 {
 
     public OAuth20Service service() {
         if (service == null) {
-            service = new ServiceBuilder()
+            ServiceBuilder sb = new ServiceBuilder()
                     .apiKey(clientId)
                     .apiSecret(clientSecret)
-                    .callback(callBackUrl)
-                    .build(this);
+                    .callback(callBackUrl);
+
+            if (state != null && state) {
+                sb.state("secret" + new Random().nextInt(999_999));
+            }
+
+            if (!Strings.isNullOrEmpty(scope)) {
+                sb.scope(scope);
+            }
+
+            service = sb.build(this);
         }
         return service;
     }
