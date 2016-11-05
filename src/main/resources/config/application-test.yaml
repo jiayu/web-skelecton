@@ -1,21 +1,28 @@
-#By default, use in-memory database for testing
 spring:
+  profiles: test
   jpa:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:h2:mem:MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:mysql://127.0.0.1:3307/achilles
+    username: admin
+    password: aff6afdd
+  redis:
+    host: 127.0.0.1
+    port: 6380
 
 logging:
   path: logs/
+  level:
+      org.springframework.security: DEBUG
 
 server:
-  port: 8080
+  port: 5000
 
 app:
   skeleton:
     validation:
-      timeAllow: 60
+      timeAllow: 5
       enable: false
   auth:
     github:
