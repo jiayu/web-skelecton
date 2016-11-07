@@ -4,29 +4,24 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import me.jamc.skeleton.dao.DaoHelper;
-import me.jamc.skeleton.exception.ValidationException;
 import me.jamc.skeleton.model.ExceptionRecord;
-import me.jamc.skeleton.security.Authorization;
 
 /**
  * Created by Jamc on 10/26/16.
  */
 @ControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class GlobalExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-    @Autowired
-    private Authorization sign;
 
     @Autowired
     private DaoHelper helper;
@@ -48,18 +43,4 @@ public class GlobalExceptionHandler {
         throw e;
     }
 
-    @ExceptionHandler(ValidationException.class)
-    public void validationExceptionHandler(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        String method = request.getMethod();
-        String uri = request.getRequestURI();
-        String params = request.getQueryString();
-        String secretKey = request.getHeader("accessKey");
-        String signature = request.getHeader("signature");
-        long timestamp = Long.parseLong(request.getHeader("timestamp"));
-        LOG.error("Validation exception expected signature is {} while given one is {}",
-                signature, sign.sign(uri,method, params, secretKey, timestamp));
-
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-    }
 }
