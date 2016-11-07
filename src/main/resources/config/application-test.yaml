@@ -4,6 +4,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://127.0.0.1:3307/skeleton
     username: admin
     password: aff6afdd
