@@ -14,6 +14,7 @@ import java.util.List;
 
 import io.swagger.annotations.ApiOperation;
 import me.jamc.skeleton.controller.request.BasicRequest;
+import me.jamc.skeleton.controller.response.AppResponse;
 import me.jamc.skeleton.model.User;
 import me.jamc.skeleton.service.UserService;
 
@@ -28,13 +29,19 @@ public class UserController {
     @RequestMapping(value = "/{firstName}/{lastName}", method = RequestMethod.POST)
     @ApiOperation(value = "Add a new user", 
         notes = "use for adding a new user, firstname and lastname could not be empty")
-    public boolean addUser(@PathVariable String firstName, @PathVariable String lastName,
-                           @RequestBody BasicRequest request) {
+    public AppResponse addUser(@PathVariable String firstName, @PathVariable String lastName,
+                               @RequestBody BasicRequest request) {
         log.info("The request body is {}", request);
+        AppResponse r = new AppResponse();
         if(StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)) {
-            return false;
+            r.setSuccess(false);
+            return r;
         }
-        return service.addUser(firstName, lastName);
+
+        boolean f = service.addUser(firstName, lastName);
+        r.setSuccess(f);
+
+        return r;
     }
 
     @RequestMapping(value = "/{id}/{firstName}/{lastName}", method=RequestMethod.PUT)
