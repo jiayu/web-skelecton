@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.io.IOException;
-
 import me.jamc.skeleton.controller.response.ErrorResponse;
 import me.jamc.skeleton.exception.ValidationException;
 
@@ -23,8 +21,7 @@ public class RequestExceptionHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ErrorResponse> handleAppValidationError(ValidationException e)
-            throws IOException {
+    public ResponseEntity<ErrorResponse> handleAppValidationError(ValidationException e) {
         ErrorResponse r = new ErrorResponse();
         r.setSuccess(false);
         r.setException(e.getClass().getName());

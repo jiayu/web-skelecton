@@ -16,7 +16,7 @@ app:
   skeleton:
     validation:
       timeAllow: 60
-      enable: false
+      enable: true
   auth:
     github:
       clientId: 3517d4ca645a5fc90974

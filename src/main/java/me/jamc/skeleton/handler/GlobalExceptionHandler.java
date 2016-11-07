@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
+import me.jamc.skeleton.controller.response.ErrorResponse;
 import me.jamc.skeleton.dao.DaoHelper;
 import me.jamc.skeleton.model.ExceptionRecord;
 
@@ -27,7 +29,7 @@ public class GlobalExceptionHandler {
     private DaoHelper helper;
 
     @ExceptionHandler(Exception.class)
-    public void defaultExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
+    public ResponseEntity<ErrorResponse> handleUnexpectedException(HttpServletRequest request, Exception e) {
         LOG.error("Error {}!!", e.getMessage());
 
         String method = request.getMethod();
@@ -40,7 +42,11 @@ public class GlobalExceptionHandler {
         r.setExceptionName(e.getClass().getName());
         helper.exceptionRecord().save(r);
 
-        throw e;
+        ErrorResponse er = new ErrorResponse();
+        er.setSuccess(false);
+        er.setException(e.getClass().getName());
+        er.setErrorMsg(e.getMessage());
+        return ResponseEntity.ok().body(er);
     }
 
 }

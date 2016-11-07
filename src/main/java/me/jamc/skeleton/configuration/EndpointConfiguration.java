@@ -28,9 +28,9 @@ public class EndpointConfiguration extends WebMvcConfigurerAdapter{
     public void addInterceptors(InterceptorRegistry registry) {
 
         if (enableValidation) {
-            registry.addInterceptor(validInt).addPathPatterns("/ws/**"); //Step 1, to check if the request is valid
+            registry.addInterceptor(validInt).addPathPatterns("/app/**"); //Step 1, to check if the request is valid
         }
-        registry.addInterceptor(execInt).addPathPatterns("/ws/**"); //Step 2, to track the performance
+        registry.addInterceptor(execInt).addPathPatterns("/app/**"); //Step 2, to track the performance
     }
 
 }
