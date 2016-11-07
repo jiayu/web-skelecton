@@ -4,7 +4,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3306/achilles
+    url: jdbc:mysql://localhost:3306/skeleton
     username: root
     password: password
   redis:
@@ -23,7 +23,7 @@ app:
   skeleton:
     validation:
       timeAllow: 5
-      enable: false
+      enable: true
   auth:
     github:
       clientId: 3517d4ca645a5fc90974
