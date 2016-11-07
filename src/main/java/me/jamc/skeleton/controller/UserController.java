@@ -1,8 +1,11 @@
 package me.jamc.skeleton.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import io.swagger.annotations.ApiOperation;
+import me.jamc.skeleton.controller.request.BasicRequest;
 import me.jamc.skeleton.model.User;
 import me.jamc.skeleton.service.UserService;
 
 @RestController
 @RequestMapping(value = "/app/user")
 public class UserController {
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserService service;
@@ -23,7 +28,9 @@ public class UserController {
     @RequestMapping(value = "/{firstName}/{lastName}", method = RequestMethod.POST)
     @ApiOperation(value = "Add a new user", 
         notes = "use for adding a new user, firstname and lastname could not be empty")
-    public boolean addUser(@PathVariable String firstName, @PathVariable String lastName) {
+    public boolean addUser(@PathVariable String firstName, @PathVariable String lastName,
+                           @RequestBody BasicRequest request) {
+        log.info("The request body is {}", request);
         if(StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)) {
             return false;
         }
