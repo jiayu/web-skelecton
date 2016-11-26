@@ -2,6 +2,9 @@ package me.jamc.skeleton.filter;
 
 import com.google.common.io.ByteStreams;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,8 +27,11 @@ import javax.servlet.http.HttpServletRequestWrapper;
  *
  * Making stream in request body re-readable.
  */
-@WebFilter
+@WebFilter(urlPatterns = "/app/*")
 public class RequestBodyWrappingFilter implements Filter {
+
+    private Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -33,9 +39,10 @@ public class RequestBodyWrappingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.info("I am in the request filter");
         HttpServletRequest req = (HttpServletRequest)request;
         if ("POST".equals(req.getMethod()) || "PUT".equals(req.getMethod())) {
-            ACHServletRequestWrapper wrapper = new ACHServletRequestWrapper((HttpServletRequest)request);
+            CustomRequestWrapper wrapper = new CustomRequestWrapper((HttpServletRequest)request);
             chain.doFilter(wrapper, response);
         } else {
             chain.doFilter(request, response);
@@ -47,11 +54,11 @@ public class RequestBodyWrappingFilter implements Filter {
 
     }
 
-    class ACHServletRequestWrapper extends HttpServletRequestWrapper {
+    class CustomRequestWrapper extends HttpServletRequestWrapper {
 
-        private final byte[] body;
+        private byte[] body;
 
-        public ACHServletRequestWrapper(HttpServletRequest request)
+        public CustomRequestWrapper(HttpServletRequest request)
                 throws IOException {
             super(request);
             body = ByteStreams.toByteArray(request.getInputStream());

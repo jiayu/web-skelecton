@@ -20,7 +20,7 @@ public class RequestExceptionHandler {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @ExceptionHandler(ValidationException.class)
+    @ExceptionHandler({ValidationException.class, NullPointerException.class})
     public ResponseEntity<ErrorResponse> handleAppValidationError(ValidationException e) {
         ErrorResponse r = new ErrorResponse();
         r.setSuccess(false);
