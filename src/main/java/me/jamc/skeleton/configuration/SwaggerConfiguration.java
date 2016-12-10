@@ -1,12 +1,10 @@
 package me.jamc.skeleton.configuration;
 
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -26,7 +24,7 @@ public class SwaggerConfiguration {
                 .forCodeGeneration(true)
                 .pathMapping("/")
                 .select()
-                .paths(or(regex("/api/.*")))
+                .apis(RequestHandlerSelectors.basePackage("me.jamc.skeleton.controller"))
                 .build()
                 .apiInfo(new ApiInfo("User", "To test api", "0.1", "This is a demo of spring boot",
                         new Contact("Jiayu Ji", "https://github.com/jiayu", "jiayu.ji@gmail.com"),
