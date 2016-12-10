@@ -6,7 +6,7 @@ import me.jamc.skeleton.model.User;
 
 public interface UserService {
 
-    public boolean addUser(String firstName, String lastName);
+    public User addUser(String firstName, String lastName);
     public boolean updateUser(int id, String firstName, String lastName);
     public User getUser(int id);
     public boolean deleteUser(int id);

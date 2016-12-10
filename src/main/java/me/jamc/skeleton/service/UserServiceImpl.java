@@ -1,13 +1,13 @@
 package me.jamc.skeleton.service;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.jamc.skeleton.model.User;
+import java.util.LinkedList;
+import java.util.List;
+
 import me.jamc.skeleton.dao.UserRepository;
+import me.jamc.skeleton.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,12 +16,12 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepo;
 
     @Override
-    public boolean addUser(String firstName, String lastName) {
+    public User addUser(String firstName, String lastName) {
         User u = new User();
         u.setFirstName(firstName);
         u.setLastName(lastName);
-        userRepo.save(u);
-        return true;
+        User savedUser = userRepo.save(u);
+        return savedUser;
     }
 
     @Override
