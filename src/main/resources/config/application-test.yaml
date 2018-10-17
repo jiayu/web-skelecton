@@ -25,13 +25,3 @@ app:
     validation:
       timeAllow: 5
       enable: false
-  auth:
-    github:
-      clientId: 3517d4ca645a5fc90974
-      clientSecret: 5fda54dda689652a75c9dd598c0b8b799dd21228
-      accessTokenEndpoint: https://github.com/login/oauth/access_token
-      authorizationBaseUrl: https://github.com/login/oauth/authorize
-      callBackUrl: http://localhost:8080/oauth/github
-      scope: user
-      active: true
-      verb: post
