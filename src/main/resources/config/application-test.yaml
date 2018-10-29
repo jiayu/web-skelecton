@@ -5,12 +5,9 @@ spring:
       ddl-auto: none
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://127.0.0.1:3307/skeleton
-    username: admin
-    password: aff6afdd
-  redis:
-    host: 127.0.0.1
-    port: 6380
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
 logging:
   path: logs/
